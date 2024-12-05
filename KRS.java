@@ -1,9 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class KRS {
     static Scanner input = new Scanner(System.in);
-    static int baris = 0;
-    static String[][] KRS = new String[20][5];;
+    static List<String[]> KRS = new ArrayList<>();
 
     public static void main(String[] args) {
         do {
@@ -51,12 +52,12 @@ public class KRS {
                     "NIM", "Nama", "Kode Mk", "Nama Matkul", "SKS");
             System.out.println("------------------------------------------------------------------------");
 
-            for (int i = 0; i < KRS.length; i++) {
-                if (KRS[i][0] != null && KRS[i][0].equals(nim)) {
+            for (String[] data : KRS) {
+                if (data[0].equals(nim)) {
                     ditemukan = true;
                     System.out.printf("%-15s %-15s %-15s %-15s %-10s\n",
-                            KRS[i][0], KRS[i][1], KRS[i][2], KRS[i][3], KRS[i][4]);
-                    totalSKS += Integer.parseInt(KRS[i][4]);
+                            data[0], data[1], data[2], data[3], data[4]);
+                    totalSKS += Integer.parseInt(data[4]);
                 }
             }
 
@@ -65,27 +66,26 @@ public class KRS {
                 break;
             } else {
                 System.out.println("Tidak ada data untuk NIM " + nim);
-                System.out.println("Masukkin lagi ganteng\n");
+                System.out.println("Masukkan lagi ganteng\n");
             }
         } while (true);
     }
 
     public static void analisisKRS() {
-        if (baris == 0) {
+        if (KRS.isEmpty()) {
             System.out.println("Belum ada data mahasiswa.");
             return;
         }
 
         int mahasiswaKurangSKS = 0;
-        for (int i = 0; i < baris; i++) {
-            if (Integer.parseInt(KRS[i][4]) < 20) {
+        for (String[] data : KRS) {
+            if (Integer.parseInt(data[4]) < 20) {
                 mahasiswaKurangSKS++;
             }
         }
 
         System.out.println("\n--- Analisis Data KRS ---");
         System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + mahasiswaKurangSKS);
-
     }
 
     public static void tambahKRS() {
@@ -117,14 +117,15 @@ public class KRS {
                 }
             } while (true);
 
-            KRS[baris][0] = String.format("%d", nim);
-            KRS[baris][1] = nama;
-            KRS[baris][2] = kodeMatKul;
-            KRS[baris][3] = namaMatKul;
-            KRS[baris][4] = String.format("%d", sks);
-            baris++;
+            KRS.add(new String[] {
+                    String.valueOf(nim),
+                    nama,
+                    kodeMatKul,
+                    namaMatKul,
+                    String.valueOf(sks)
+            });
 
-            System.out.println("Data mata kuliah berhasil ditambakan.");
+            System.out.println("Data mata kuliah berhasil ditambahkan.");
 
             System.out.print("Tambah mata kuliah lain? (y/t) : ");
             String choice = input.nextLine();
