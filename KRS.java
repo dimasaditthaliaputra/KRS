@@ -89,8 +89,10 @@ public class KRS {
     }
 
     public static void tambahKRS() {
-        int nim, sks;
+        int nim, sks, totalSKS, maxSKS;
         String nama, kodeMatKul, namaMatKul;
+        totalSKS = 0;
+        maxSKS = 24;
 
         System.out.println("\n--- Tambah Data KRS ---");
         System.out.print("Nama : ");
@@ -104,6 +106,9 @@ public class KRS {
             kodeMatKul = input.nextLine();
             System.out.print("Nama Mata Kuliah : ");
             namaMatKul = input.nextLine();
+            int sisaSKS = maxSKS - totalSKS;
+            System.out.println("Sisa SKS yang tersedia: " + sisaSKS);
+            
             do {
                 System.out.print("Jumlah SKS (1-3) : ");
                 sks = input.nextInt();
@@ -113,7 +118,13 @@ public class KRS {
                     System.out.println("Jumlah SKS tidak valid, masukkan ulang.");
                     continue;
                 } else {
-                    break;
+                    if (totalSKS + sks > maxSKS) {
+                        System.out.println("Total SKS tidak boleh lebih dari 24. Total SKS saat ini: " + totalSKS);
+                        continue;
+                    } else {
+                        totalSKS += sks;
+                        break;
+                    }
                 }
             } while (true);
 
@@ -134,7 +145,7 @@ public class KRS {
                 if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("t")) {
                     break;
                 }
-                System.out.println("Masukkan input yang benar!");
+                System.out.println("Input Salah, Mohon masukkan input yang benar!");
             } while (true);
 
             if (choice.equalsIgnoreCase("t")) {
