@@ -39,6 +39,11 @@ public class KRS {
     }
 
     public static void tampilkanKRS() {
+        if (KRS.isEmpty()) {
+            System.out.println("Data Tidak Tersedia");
+            return;
+        }
+        
         System.out.println("\n--- Tampilkan Daftar KRS Mahasiswa ---");
         do {
             System.out.print("Masukkan NIM mahasiswa: ");
