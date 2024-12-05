@@ -66,7 +66,6 @@ public class KRS {
                 break;
             } else {
                 System.out.println("Tidak ada data untuk NIM " + nim);
-                System.out.println("Masukkan lagi ganteng\n");
             }
         } while (true);
     }
@@ -108,7 +107,7 @@ public class KRS {
             namaMatKul = input.nextLine();
             int sisaSKS = maxSKS - totalSKS;
             System.out.println("Sisa SKS yang tersedia: " + sisaSKS);
-            
+
             do {
                 System.out.print("Jumlah SKS (1-3) : ");
                 sks = input.nextInt();
