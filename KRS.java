@@ -81,15 +81,25 @@ public class KRS {
             return;
         }
 
-        int mahasiswaKurangSKS = 0;
-        for (String[] data : KRS) {
-            if (Integer.parseInt(data[4]) < 20) {
-                mahasiswaKurangSKS++;
+        int mhsKurangSKS = 0;
+        boolean[] sudahDihitung = new boolean[KRS.size()];
+
+        for (int i = 0; i < KRS.size(); i++) {
+            String[] data = KRS.get(i);
+            if (!sudahDihitung[i]) {
+                if (Integer.parseInt(data[4]) < 20) {
+                    mhsKurangSKS++;
+                }
+                for (int j = i + 1; j < KRS.size(); j++) {
+                    if (data[0].equals(KRS.get(j)[0])) {
+                        sudahDihitung[j] = true;
+                    }
+                }
             }
         }
 
         System.out.println("\n--- Analisis Data KRS ---");
-        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + mahasiswaKurangSKS);
+        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + mhsKurangSKS);
     }
 
     public static void tambahKRS() {
