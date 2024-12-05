@@ -137,15 +137,17 @@ public class KRS {
 
             System.out.println("Data mata kuliah berhasil ditambahkan.");
 
-            System.out.print("Tambah mata kuliah lain? (y/t) : ");
-            String choice = input.nextLine();
+            String choice;
+            while (true) {
+                System.out.print("Tambah mata kuliah lain? (y/t) : ");
+                choice = input.nextLine();
 
-            do {
                 if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("t")) {
                     break;
+                } else {
+                    System.out.println("Input Salah, Mohon masukkan input yang benar!");
                 }
-                System.out.println("Input Salah, Mohon masukkan input yang benar!");
-            } while (true);
+            }
 
             if (choice.equalsIgnoreCase("t")) {
                 break;
